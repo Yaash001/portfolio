@@ -34,7 +34,7 @@ If you want to run this locally:
 
 ```bash
 git clone https://github.com/Yaash001/portfolio.git
-cd YashPortfolio
+cd portfolio
 ```
 
 ### 2. Install Dependencies
