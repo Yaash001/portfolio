@@ -10,7 +10,7 @@ Built with ❤️ using **React**, **Vite**, **Tailwind CSS**, **shadcn/ui**, **
 
 > Add a screenshot or GIF here  
 > _Example:_  
-> ![Demo](./screenshot.png)
+> ![Demo](demo.png)
 
 ---
 
@@ -26,23 +26,6 @@ Built with ❤️ using **React**, **Vite**, **Tailwind CSS**, **shadcn/ui**, **
 
 ---
 
-## 📁 Folder Structure
-
-```
-src/
-├── components/
-│   ├── Navbar.jsx
-│   ├── Footer.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Projects.jsx
-│   └── Contact.jsx
-├── App.jsx
-└── main.jsx
-```
-
----
-
 ## 🚀 Getting Started
 
 If you want to run this locally:
@@ -50,7 +33,7 @@ If you want to run this locally:
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YashPortfolio.git
+git clone https://github.com/Yaash001/portfolio.git
 cd YashPortfolio
 ```
 
@@ -89,21 +72,18 @@ To deploy this site (e.g., on Vercel):
 npm run build
 ```
 
-Then push your code to GitHub and connect the repo to [https://vercel.com](https://vercel.com)
+Then push your code to GitHub and connect the repo to 
+
 
 ---
 
 ## 👋 About Me
 
-I'm **Yash Lahane**, a developer passionate about building things with React and learning new tools every day.
+I'm **Yash Lahane**, a developer passionate about building things with React and learning new tools like Docker,GIT,GITHUB etc. every day.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin)](https://linkedin.com/in/YOUR-LINKEDIN)  
-[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/YOUR-GITHUB)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/yash-lahane-8a25a82a9/)  
+[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/Yaash001)
 
 ---
 
-## 📜 License
-
-Feel free to fork, clone, or build on top of this.  
-Licensed under the [MIT License](LICENSE).
 
