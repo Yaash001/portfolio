@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { TypeAnimation } from "react-type-animation";
+import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
@@ -15,11 +16,18 @@ export default function Hero() {
       {/* Heading */}
       <div className="mb-12">
         <h1 className="text-5xl font-bold mb-4">Hey, I'm Yash</h1>
-        <p className="text-xl text-gray-200 max-w-xl">
-          I build modern, responsive websites using React, Tailwind CSS, and a touch of creativity.
-        </p>
+        <TypeAnimation 
+        sequence={
+          [
+            "FrontEnd Developer",3000,
+            "Backend Learner",2000,
+            "A Creative Coder",3000,
+          ]
+        }
 
-        {/* CTA button */}
+        wrapper="span" speed={10} repeat={Infinity} className="block text-2xl text-white mt-2"
+        />
+
         <div className="mt-6">
           <Link to="/contact">
             <Button variant="secondary">Let's Connect</Button>
