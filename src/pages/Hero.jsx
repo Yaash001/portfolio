@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { TypeAnimation } from "react-type-animation";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import CustomCard from '../components/FlipCard';
 
 export default function Hero() {
   return (
@@ -37,33 +37,21 @@ export default function Hero() {
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4">
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white shadow-md">
-          <CardHeader>
-            <CardTitle className="text-2xl">Frontend Developer</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>React, Vite, Tailwind — UI magic at your service ✨</p>
-          </CardContent>
-        </Card>
+  <CustomCard
+    title="Frontend Developer"
+    description="React, Vite, Tailwind — UI magic at your service ✨"
+  />
+  <CustomCard
+    title="Backend Learner"
+    description="Spring Boot + MongoDB — building scalable apps 🚀"
+  />
+  <CustomCard
+    title="Creative Coder"
+    description="Turning ideas into elegant, functional code 💡"
+  />
+</div>
 
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white shadow-md">
-          <CardHeader>
-            <CardTitle className="text-2xl">Backend Learner</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>Spring Boot + MongoDB — building scalable apps 🚀</p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white shadow-md">
-          <CardHeader>
-            <CardTitle className="text-2xl">Creative Coder</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>I love turning ideas into elegant, functional code 💡</p>
-          </CardContent>
-        </Card>
-      </div>
+        
     </motion.div>
   );
 }
