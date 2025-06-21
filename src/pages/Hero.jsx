@@ -3,7 +3,9 @@ import { TypeAnimation } from "react-type-animation";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import FlipCard from "../components/FlipCard";
-import { frontContent, backContent } from "../components/data/frontendContent";
+import { frontendBack, frontendFront } from "../components/data/frontendContent";
+import { backendBack, backendFront } from "../components/data/backendContent";
+import { toolsFront,toolsBack } from './../components/data/toolsContent';
 
 
 
@@ -42,22 +44,21 @@ export default function Hero() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4">
 <FlipCard
 
-  frontContent={frontContent}
-  backContent={backContent}
+  frontContent={frontendFront}
+  backContent={frontendBack}
  
 />
 
-{
-  /*
+
   <FlipCard
-    title="Backend Learner"
-    description="Spring Boot + MongoDB — building scalable apps 🚀"
+    frontContent={backendFront}
+    backContent={backendBack}
   />
 
   <FlipCard
-    title="Creative Coder"
-    description="Turning ideas into elegant, functional code 💡"
-  /> */}
+    frontContent={toolsFront}
+    backContent={toolsBack}
+  /> 
 
  
 </div>
