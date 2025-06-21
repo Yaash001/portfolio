@@ -2,12 +2,15 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
-import CustomCard from '../components/FlipCard';
+import FlipCard from "../components/FlipCard";
+import { frontContent, backContent } from "../components/data/frontendContent";
+
+
 
 export default function Hero() {
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-r from-blue-500 via-fuchsia-500 to-purple-500 flex flex-col items-center justify-center text-white text-center px-4"
+      className="min-h-screen bg-gradient-to-r from-blue-500 via-fuchsia-500 to-purple-500 flex flex-col items-center justify-center max-h-full text-white text-center px-4"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -40 }}
@@ -37,18 +40,26 @@ export default function Hero() {
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4">
-  <CustomCard
-    title="Frontend Developer"
-    description="React, Vite, Tailwind — UI magic at your service ✨"
-  />
-  <CustomCard
+<FlipCard
+
+  frontContent={frontContent}
+  backContent={backContent}
+ 
+/>
+
+{
+  /*
+  <FlipCard
     title="Backend Learner"
     description="Spring Boot + MongoDB — building scalable apps 🚀"
   />
-  <CustomCard
+
+  <FlipCard
     title="Creative Coder"
     description="Turning ideas into elegant, functional code 💡"
-  />
+  /> */}
+
+ 
 </div>
 
         
