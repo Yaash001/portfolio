@@ -61,11 +61,21 @@
 @layer base {
   * {
   /*  @apply border-border; */
+    body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
   }
   body {
   /*  @apply bg-background text-foreground; */
   }
 }
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 
 /* FlipCard styles */
 .card-container {

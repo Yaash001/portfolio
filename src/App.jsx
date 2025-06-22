@@ -10,15 +10,17 @@ export default function App() {
   return (
     <>
       <Navbar />
-
-      <main className="pt-16">
+<div className="flex flex-col min-h-screen pt-16">
+      <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-        <Pgfooter/>
       </main>
+      <Pgfooter/>
+      </div>
+
       
 
 
