@@ -6,6 +6,9 @@ import FlipCard from "../components/FlipCard";
 import { frontendBack, frontendFront } from "../components/data/frontendContent";
 import { backendBack, backendFront } from "../components/data/backendContent";
 import { toolsFront,toolsBack } from './../components/data/toolsContent';
+import { Code2 } from "lucide-react";
+import YashLogo from "../assets/icons/YashLogo.png";
+ 
 
 
 
@@ -18,6 +21,15 @@ export default function Hero() {
       exit={{ opacity: 0, y: -40 }}
       transition={{ duration: 1 }}
     >
+
+  <div className="flex items-center justify-center mb-4">
+  <img
+    src={YashLogo} 
+    alt="Yash Logo"
+  className="w-20 h-20 rounded-full border-2 border-white transition-shadow shadow-[0_0_24px_6px_rgba(255,255,255,0.2)] hover:shadow-[0_0_24px_6px_rgba(255,255,255,0.9)] mb-4"
+  />
+</div>
+
       {/* Heading */}
       <div className="mb-12">
         <h1 className="text-5xl font-bold mb-4">Hey, I'm Yash</h1>
