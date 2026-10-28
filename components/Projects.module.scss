@@ -1,0 +1,171 @@
+.projects {
+  padding: clamp(4rem, 8vw, 7rem) var(--page-gutter);
+  background: var(--color-cream);
+}
+
+.header {
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow,
+.techLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+}
+
+.header h2 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+.header h2 span {
+  color: var(--color-muted);
+}
+
+.intro {
+  max-width: 480px;
+  margin-top: 1rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border: 1px solid rgba(4, 106, 57, 0.18);
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cardMeta {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.imageWrap {
+  width: 100%;
+  height: clamp(170px, 24vw, 240px);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: rgba(4, 106, 57, 0.06);
+}
+
+.imageWrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+  object-position: center;
+}
+
+.card h3 {
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  line-height: 1.2;
+}
+
+.description {
+  max-width: 540px;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.techSection {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.techLabel {
+  margin-bottom: 0.65rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+}
+
+.tech {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(4, 106, 57, 0.2);
+  border-radius: 999px;
+  color: var(--color-green);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  cursor: default;
+  transition: color 180ms ease;
+}
+
+.tech[data-checked="true"] {
+  color: var(--color-cream);
+}
+
+.techHighlight {
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--color-green);
+  pointer-events: none;
+}
+
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-underline-offset: 4px;
+}
+
+.projectLink:hover {
+  text-decoration: underline;
+}
+
+.projectLink span {
+  transition: transform 180ms ease;
+}
+
+.projectLink:hover span {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardMeta {
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech,
+  .projectLink span {
+    transition: none;
+  }
+}
+

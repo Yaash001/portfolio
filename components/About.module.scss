@@ -1,0 +1,50 @@
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  padding: 7rem var(--page-gutter);
+  background: var(--color-green);
+  color: var(--color-cream);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.content {
+  max-width: 850px;
+}
+
+.content h2 {
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 650px;
+  margin-top: 2rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.8;
+}
+
+.detail {
+  max-width: 600px;
+  margin-top: 1.25rem;
+  color: rgb(249 235 215 / 75%);
+  line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
