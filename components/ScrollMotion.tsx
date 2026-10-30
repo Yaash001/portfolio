@@ -126,5 +126,7 @@ export default function ScrollMotion({
     >
       {children}
     </main>
+
+    
   );
 }
