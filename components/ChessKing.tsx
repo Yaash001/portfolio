@@ -10,11 +10,8 @@ function KingModel() {
   const { scene } = useGLTF("/models/chess-king.glb");
   const kingRef = useRef<THREE.Group>(null);
 
-
   const model = useMemo(() => {
     const clone = scene.clone(true);
-
-    // Apply all nested model transforms.
     clone.updateMatrixWorld(true);
 
     const box = new THREE.Box3().setFromObject(clone);
@@ -24,10 +21,8 @@ function KingModel() {
     const largestDimension = Math.max(size.x, size.y, size.z);
     const scale = 3.2 / largestDimension;
 
-    // Center the model inside a parent group.
     const group = new THREE.Group();
     group.add(clone);
-
     clone.position.sub(center);
     group.scale.setScalar(scale);
 
@@ -35,20 +30,48 @@ function KingModel() {
   }, [scene]);
 
   useFrame((state, delta) => {
-    if (!kingRef.current) return;
+    const king = kingRef.current;
+    if (!king) return;
 
-    kingRef.current.rotation.y -= delta * 0.45;
+    const time = state.clock.elapsedTime;
+    const pointer = state.pointer;
 
-    kingRef.current.rotation.x = THREE.MathUtils.lerp(
-      kingRef.current.rotation.x,
-      state.pointer.y * 0.2,
-      0.06
+    // Slow continuous rotation
+    king.rotation.y -= delta * 0.3;
+
+    // Smooth 3D mouse-responsive tilt
+    const targetRotationX =
+      pointer.y * 0.18 + Math.sin(time * 0.7) * 0.025;
+
+    const targetRotationZ = -pointer.x * 0.13;
+
+    king.rotation.x = THREE.MathUtils.damp(
+      king.rotation.x,
+      targetRotationX,
+      4,
+      delta
     );
 
-    kingRef.current.rotation.z = THREE.MathUtils.lerp(
-      kingRef.current.rotation.z,
-      -state.pointer.x * 0.15,
-      0.06
+    king.rotation.z = THREE.MathUtils.damp(
+      king.rotation.z,
+      targetRotationZ,
+      4,
+      delta
+    );
+
+    // Floating depth and parallax
+    king.position.x = THREE.MathUtils.damp(
+      king.position.x,
+      pointer.x * 0.14,
+      4,
+      delta
+    );
+
+    king.position.y = THREE.MathUtils.damp(
+      king.position.y,
+      Math.sin(time * 0.9) * 0.045 + pointer.y * 0.09,
+      4,
+      delta
     );
   });
 
