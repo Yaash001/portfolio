@@ -1,6 +1,7 @@
 import projects from "../data/projects";
 import { AnimatedBackground } from "./motion-primitives/animated-background";
 import styles from "./Projects.module.scss";
+import { Cursor } from "./motion-primitives/cursor";
 
 export default function Projects() {
   return (
@@ -23,13 +24,36 @@ export default function Projects() {
               <span>{project.category}</span>
             </div>
 
-            {project.image && (
-              <div className={styles.imageWrap}>
-                <img src={project.image} alt={`${project.title} preview`} />
-              </div>
-            )}
+            <div className={styles.titleHover}>
+              <h3>{project.title}</h3>
 
-            <h3>{project.title}</h3>
+              {project.image && (
+                <Cursor
+                  attachToParent
+                  variants={{
+                    initial: { height: 0, opacity: 0, scale: 0.3 },
+                    animate: { height: "auto", opacity: 1, scale: 1 },
+                    exit: { height: 0, opacity: 0, scale: 0.3 },
+                  }}
+                  transition={{
+                    type: "spring",
+                    duration: 0.3,
+                    bounce: 0.1,
+                  }}
+                  springConfig={{
+                    bounce: 0.01,
+                  }}
+                  className={styles.projectCursor}
+                >
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className={styles.cursorImage}
+                  />
+                </Cursor>
+              )}
+            </div>
+
             <p className={styles.description}>{project.description}</p>
 
             <div className={styles.techSection}>

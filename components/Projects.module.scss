@@ -63,23 +63,6 @@
   font-size: 0.8rem;
 }
 
-.imageWrap {
-  width: 100%;
-  height: clamp(170px, 24vw, 240px);
-  margin-bottom: 1.25rem;
-  overflow: hidden;
-  border-radius: 0.75rem;
-  background: rgba(4, 106, 57, 0.06);
-}
-
-.imageWrap img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit:cover;
-  object-position: center;
-}
-
 .card h3 {
   margin-bottom: 0.6rem;
   font-size: clamp(1.4rem, 2.5vw, 2rem);
@@ -167,5 +150,28 @@
   .projectLink span {
     transition: none;
   }
+}
+
+.titleHover {
+  position: relative;
+  width: fit-content;
+  cursor: none;
+}
+
+.projectCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.cursorImage {
+  display: block;
+  width: 380px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
 

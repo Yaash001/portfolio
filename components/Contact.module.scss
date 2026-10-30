@@ -1,0 +1,59 @@
+.contact {
+  padding: 7rem var(--page-gutter);
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--color-green);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+}
+
+.content h2 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+.content h2 span {
+  color: var(--color-green);
+}
+
+.description {
+  max-width: 550px;
+  margin: 1.5rem auto 2rem;
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.emailButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.75rem;
+  border-radius: 999px;
+  background: var(--color-green);
+  color: var(--color-cream);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.emailButton:hover {
+  transform: translateY(-3px);
+}
+
+.email {
+  margin-top: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
