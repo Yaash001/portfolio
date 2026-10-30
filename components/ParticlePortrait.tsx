@@ -18,6 +18,7 @@ export default function ParticlePortrait() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
 
@@ -25,8 +26,27 @@ export default function ParticlePortrait() {
 
     const image = new Image();
     let particles: Particle[] = [];
-    let animationFrame = 0;
-    let width = 0;
+let animationFrame = 0;
+let isRunning = false;
+let isInView = false;
+
+const startAnimation = () => {
+  if (
+    isRunning ||
+    !isInView ||
+    document.visibilityState !== "visible"
+  ) return;
+
+  isRunning = true;
+  animationFrame = requestAnimationFrame(draw);
+};
+
+const stopAnimation = () => {
+  isRunning = false;
+  cancelAnimationFrame(animationFrame);
+};
+
+let width = 0;
     let height = 0;
     let isForming = false;
     let pointer = { x: -1000, y: -1000 };
@@ -130,8 +150,9 @@ ctx.fillStyle = isForming
 ctx.fill();
       }
 
-      animationFrame = requestAnimationFrame(draw);
-    };
+if (isRunning) {
+  animationFrame = requestAnimationFrame(draw);
+}    };
 
     const handlePointerMove = (event: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -152,10 +173,37 @@ ctx.fill();
 
     // Register image events BEFORE setting src.
     image.onload = () => {
-      createParticles();
-      cancelAnimationFrame(animationFrame);
-      draw();
-    };
+  createParticles();
+  startAnimation();
+};
+
+const intersectionObserver = new IntersectionObserver(
+  ([entry]) => {
+    isInView = entry.isIntersecting;
+
+    if (isInView) {
+      startAnimation();
+    } else {
+      stopAnimation();
+    }
+  },
+  { rootMargin: "100px" }
+);
+
+intersectionObserver.observe(canvas);
+
+const handleVisibilityChange = () => {
+  if (document.visibilityState === "visible") {
+    startAnimation();
+  } else {
+    stopAnimation();
+  }
+};
+
+document.addEventListener(
+  "visibilitychange",
+  handleVisibilityChange
+);
 
     image.onerror = () => {
       console.error("Portrait image could not load. Check /images/YAASH.png");
@@ -182,6 +230,15 @@ ctx.fill();
       canvas.removeEventListener("pointerenter", handlePointerEnter);
       canvas.removeEventListener("pointerleave", handlePointerLeave);
     };
+
+    
+    intersectionObserver.disconnect();
+
+document.removeEventListener(
+  "visibilitychange",
+  handleVisibilityChange
+);
+
   }, []);
 
   return (
