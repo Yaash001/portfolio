@@ -1,11 +1,14 @@
-
 import about from "../data/about";
 import styles from "./About.module.scss";
+import ParticlePortrait from "./ParticlePortrait";
 
 export default function About() {
   return (
     <section className={styles.about} id="about">
-      <p className={styles.eyebrow}>02 / ABOUT ME</p>
+      <div className={styles.visual}>
+        <p className={styles.eyebrow}>02 / ABOUT ME</p>
+        <ParticlePortrait />
+      </div>
 
       <div className={styles.content}>
         <h2>

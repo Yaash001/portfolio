@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <header className={styles.header}>
       <a className={styles.brand} href="#home" aria-label="Yash Lahane, home">
-        YL<span>.</span>
+        YL<span></span>
       </a>
 
       <nav className={styles.nav} aria-label="Main navigation">

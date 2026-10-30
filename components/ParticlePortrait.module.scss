@@ -1,0 +1,32 @@
+
+.portrait {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.hint {
+  position: absolute;
+  right: 0;
+  bottom: 0.5rem;
+  left: 0;
+  color: rgb(249 235 215 / 65%);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .portrait {
+    height: 420px;
+  }
+}

@@ -1,14 +1,19 @@
-
 .about {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: center;
   gap: 3rem;
   padding: 7rem var(--page-gutter);
   background: var(--color-green);
   color: var(--color-cream);
 }
 
+.visual {
+  min-width: 0;
+}
+
 .eyebrow {
+  margin-bottom: 2rem;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -46,5 +51,9 @@
     gap: 2.5rem;
     padding-top: 5rem;
     padding-bottom: 5rem;
+  }
+
+  .visual {
+    width: 100%;
   }
 }
