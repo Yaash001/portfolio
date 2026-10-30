@@ -143,6 +143,30 @@
   .cardMeta {
     margin-bottom: 1.25rem;
   }
+
+  .titleHover {
+  width: 100%;
+  cursor: pointer;
+}
+
+.titleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.previewIndicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(4, 106, 57, 0.3);
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 400;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -155,7 +179,50 @@
 .titleHover {
   position: relative;
   width: fit-content;
+  max-width: 100%;
   cursor: none;
+}
+
+
+.titleButton {
+  all: unset;
+  display: inline;
+  color: inherit;
+  font: inherit;
+  cursor: inherit;
+}
+
+.previewIndicator {
+  display: none;
+}
+
+.mobilePreview {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 12px;
+  animation: previewExpand 300ms ease both;
+}
+
+.mobilePreview img {
+  display: block;
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+@keyframes previewExpand {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .projectCursor {

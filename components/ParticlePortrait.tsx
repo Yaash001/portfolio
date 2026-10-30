@@ -12,7 +12,6 @@ type Particle = {
   scatterX: number;
   scatterY: number;
   color: string;
-  depth: number;
 };
 
 export default function ParticlePortrait() {
@@ -30,10 +29,7 @@ export default function ParticlePortrait() {
     let width = 0;
     let height = 0;
     let isForming = false;
-
     let pointer = { x: -1000, y: -1000 };
-    let parallax = { x: 0, y: 0 };
-    let parallaxTarget = { x: 0, y: 0 };
 
     const createParticles = () => {
       const rect = canvas.getBoundingClientRect();
@@ -66,10 +62,7 @@ export default function ParticlePortrait() {
       offCtx.drawImage(image, 0, 0, imageWidth, imageHeight);
 
       const pixels = offCtx.getImageData(
-        0,
-        0,
-        imageWidth,
-        imageHeight
+        0, 0, imageWidth, imageHeight
       ).data;
 
       const offsetX = (width - imageWidth) / 2;
@@ -93,7 +86,6 @@ export default function ParticlePortrait() {
             scatterX: Math.random() * width,
             scatterY: Math.random() * height,
             color: `rgba(${pixels[index]}, ${pixels[index + 1]}, ${pixels[index + 2]}, ${alpha / 255})`,
-            depth: 0.4 + Math.random() * 0.6,
           });
         }
       }
@@ -103,10 +95,6 @@ export default function ParticlePortrait() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-
-      // Smoothly follow the pointer
-      parallax.x += (parallaxTarget.x - parallax.x) * 0.045;
-      parallax.y += (parallaxTarget.y - parallax.y) * 0.045;
 
       for (const particle of particles) {
         let destinationX = isForming
@@ -133,24 +121,13 @@ export default function ParticlePortrait() {
         particle.x += (destinationX - particle.x) * 0.09;
         particle.y += (destinationY - particle.y) * 0.09;
 
-        // Each particle moves at a slightly different depth
-        const offsetX = parallax.x * 12 * particle.depth;
-        const offsetY = parallax.y * 12 * particle.depth;
-
         ctx.beginPath();
-        ctx.arc(
-          particle.x + offsetX,
-          particle.y + offsetY,
-          1.4,
-          0,
-          Math.PI * 2
-        );
+ctx.arc(particle.x, particle.y, 1.4, 0, Math.PI * 2);
+ctx.fillStyle = isForming
+  ? particle.color
+  : "rgba(249, 235, 215, 0.9)";
 
-        ctx.fillStyle = isForming
-          ? particle.color
-          : "rgba(249, 235, 215, 0.9)";
-
-        ctx.fill();
+ctx.fill();
       }
 
       animationFrame = requestAnimationFrame(draw);
@@ -158,15 +135,9 @@ export default function ParticlePortrait() {
 
     const handlePointerMove = (event: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
-
       pointer = {
         x: event.clientX - rect.left,
         y: event.clientY - rect.top,
-      };
-
-      parallaxTarget = {
-        x: (pointer.x / width - 0.5) * 2,
-        y: (pointer.y / height - 0.5) * 2,
       };
     };
 
@@ -177,9 +148,9 @@ export default function ParticlePortrait() {
     const handlePointerLeave = () => {
       isForming = false;
       pointer = { x: -1000, y: -1000 };
-      parallaxTarget = { x: 0, y: 0 };
     };
 
+    // Register image events BEFORE setting src.
     image.onload = () => {
       createParticles();
       cancelAnimationFrame(animationFrame);
@@ -187,9 +158,7 @@ export default function ParticlePortrait() {
     };
 
     image.onerror = () => {
-      console.error(
-        "Portrait image could not load. Check /images/YAASH.png"
-      );
+      console.error("Portrait image could not load. Check /images/YAASH.png");
     };
 
     image.src = "/images/YAASH.png";
@@ -209,7 +178,6 @@ export default function ParticlePortrait() {
     return () => {
       cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
-
       canvas.removeEventListener("pointermove", handlePointerMove);
       canvas.removeEventListener("pointerenter", handlePointerEnter);
       canvas.removeEventListener("pointerleave", handlePointerLeave);
