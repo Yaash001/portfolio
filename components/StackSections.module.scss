@@ -1,0 +1,39 @@
+.stackContainer {
+  position: relative;
+  width: 100%;
+}
+
+.stackCard {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  background: var(--color-cream);
+}
+
+/* Desktop stacking */
+@media (min-width: 769px) {
+  .stackCard {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mobile: natural document scrolling */
+@media (max-width: 768px) {
+  .stackCard {
+    position: relative;
+  }
+
+  .shade {
+    display: none;
+  }
+}

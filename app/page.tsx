@@ -6,22 +6,21 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
+import ScrollMotion from "../components/ScrollMotion";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <ScrollMotion>
         <Hero />
         <About />
-        <Projects/>
-        <Skills/>
-        <Experience/>
-          <Education />
-
-          <Contact/>
-
-      </main>
+        <Projects />
+        <Skills />
+        <Experience />
+        <Education />
+        <Contact />
+      </ScrollMotion>
     </>
   );
 }
