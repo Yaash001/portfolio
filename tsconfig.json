@@ -29,6 +29,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/LoadingScreen.jsx"  ],
   "exclude": ["node_modules"]
 }

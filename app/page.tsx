@@ -7,10 +7,13 @@ import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import ScrollMotion from "../components/ScrollMotion";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function Home() {
   return (
     <>
+          <LoadingScreen />
+
       <Navbar />
       <ScrollMotion>
         <Hero />
