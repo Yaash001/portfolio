@@ -28,7 +28,7 @@ export default function Hero() {
             </p>
           )}
 
-          <a className={styles.hero__link} href="mailto:yash.lahane0109@gmail.com" target="blank">
+          <a className={styles.hero__link} href="mailto:yash.lahane0109@gmail.com" target="_blank">
             Let&apos;s connect <span aria-hidden="true">↗</span>
           </a>
         </div>

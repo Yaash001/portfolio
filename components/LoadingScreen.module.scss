@@ -17,7 +17,10 @@
 .exit {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
 }
+
+// SCANLINES
 
 .scanlines {
   position: absolute;
@@ -32,10 +35,13 @@
   );
 }
 
+// TERMINAL
+
 .terminal {
   position: relative;
   z-index: 2;
   width: min(620px, 88%);
+  animation: appear 0.5s ease both;
 }
 
 .terminalHeader {
@@ -47,6 +53,11 @@
   font-size: 10px;
   letter-spacing: 1.5px;
   color: #62e99a;
+}
+
+.online {
+  color: #80ffad;
+  text-shadow: 0 0 8px rgba(85, 237, 145, 0.5);
 }
 
 .terminalBody {
@@ -86,6 +97,8 @@
   letter-spacing: 2px;
 }
 
+// CIRCULAR LOADER
+
 .loader {
   position: relative;
   z-index: 2;
@@ -102,29 +115,70 @@
   aspect-ratio: 1;
 }
 
-.ring svg {
+.ringSvg {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg);
   overflow: visible;
 }
 
+.outerTrack,
 .track,
-.progressRing {
+.progressRing,
+.innerTrack {
   fill: none;
-  stroke-width: 1.5;
+}
+
+.outerTrack {
+  stroke: #193c28;
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
 }
 
 .track {
   stroke: #193c28;
+  stroke-width: 2;
 }
 
 .progressRing {
   stroke: #55ed91;
+  stroke-width: 2.5;
   stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 120px 120px;
   transition: stroke-dasharray 0.1s linear;
-  filter: drop-shadow(0 0 5px rgba(85, 237, 145, 0.5));
+  filter: drop-shadow(0 0 5px rgba(85, 237, 145, 0.6))
+    drop-shadow(0 0 12px rgba(85, 237, 145, 0.25));
 }
+
+.innerTrack {
+  stroke: #21452f;
+  stroke-width: 1;
+}
+
+// ROTATING HUD SCANNER
+
+.rotatingTicks {
+  transform-origin: 120px 120px;
+  animation: scannerRotate 18s linear infinite;
+}
+
+.majorTick {
+  stroke: #64f29b;
+  stroke-width: 1.5;
+  opacity: 0.9;
+}
+
+.minorTick {
+  stroke: #285b3b;
+  stroke-width: 1;
+}
+
+.orbitDot {
+  fill: #8dffb0;
+  filter: drop-shadow(0 0 5px #55ed91);
+}
+
+// CENTER TEXT
 
 .center {
   position: absolute;
@@ -141,6 +195,7 @@
   letter-spacing: 4px;
   color: #7dffa9;
   margin: 0;
+  text-shadow: 0 0 15px rgba(85, 237, 145, 0.3);
 }
 
 .center p {
@@ -163,6 +218,61 @@
   text-align: center;
 }
 
+// FINAL WELCOME SCREEN
+
+.welcome {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  animation: welcomeReveal 1s ease both;
+}
+
+.welcomeEyebrow {
+  color: #55ed91;
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+}
+
+.welcome h1 {
+  color: #8dffb0;
+  font-size: clamp(28px, 7vw, 52px);
+  font-weight: 500;
+  letter-spacing: clamp(3px, 1vw, 8px);
+  margin: 0;
+  text-shadow:
+    0 0 10px rgba(85, 237, 145, 0.35),
+    0 0 30px rgba(85, 237, 145, 0.15);
+}
+
+.welcomeLine {
+  width: 80px;
+  height: 1px;
+  background: #55ed91;
+  margin: 28px 0;
+  box-shadow: 0 0 10px rgba(85, 237, 145, 0.6);
+}
+
+.welcomeSubtext {
+  color: #82b895;
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin: 0 0 12px;
+}
+
+.welcomeAccess {
+  color: #477b5a;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+// ANIMATIONS
+
 @keyframes blink {
   50% {
     opacity: 0;
@@ -181,6 +291,32 @@
   }
 }
 
+@keyframes scannerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes welcomeReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+// MOBILE
+
 @media (max-width: 480px) {
   .terminalBody {
     min-height: 250px;
@@ -193,18 +329,29 @@
 
   .terminalFooter {
     font-size: 8px;
+    line-height: 1.8;
+  }
+
+  .welcomeEyebrow {
+    font-size: 8px;
+  }
+
+  .welcomeSubtext {
+    font-size: 8px;
   }
 }
+
+// REDUCED MOTION
 
 @media (prefers-reduced-motion: reduce) {
   .screen,
   .loader,
-  .progressRing {
-    animation: none;
-    transition: none;
-  }
-
+  .terminal,
+  .welcome,
+  .progressRing,
+  .rotatingTicks,
   .cursor {
     animation: none;
+    transition: none;
   }
 }

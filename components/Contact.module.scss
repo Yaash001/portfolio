@@ -57,3 +57,32 @@
   color: var(--color-muted);
   font-size: 0.9rem;
 }
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.socialLinks a {
+  color: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-underline-offset: 4px;
+  transition: opacity 180ms ease;
+}
+
+.socialLinks a:hover {
+  opacity: 0.65;
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .socialLinks a {
+    transition: none;
+  }
+}

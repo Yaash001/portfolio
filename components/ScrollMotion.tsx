@@ -121,12 +121,8 @@ export default function ScrollMotion({
 
   return (
     <main
-      ref={mainRef}
-      style={{ perspective: "1400px" }}
-    >
+      ref={mainRef} style={{ perspective: "1400px" }}>
       {children}
     </main>
-
-    
   );
 }

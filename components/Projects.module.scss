@@ -145,28 +145,28 @@
   }
 
   .titleHover {
-  width: 100%;
-  cursor: pointer;
-}
+    width: 100%;
+    cursor: pointer;
+  }
 
-.titleButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-}
+  .titleButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+  }
 
-.previewIndicator {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 25px;
-  height: 25px;
-  border: 1px solid rgba(4, 106, 57, 0.3);
-  border-radius: 50%;
-  font-size: 1rem;
-  font-weight: 400;
-}
+  .previewIndicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(4, 106, 57, 0.3);
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: 400;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -182,7 +182,6 @@
   max-width: 100%;
   cursor: none;
 }
-
 
 .titleButton {
   all: unset;
@@ -241,4 +240,3 @@
   border-radius: 12px;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
-

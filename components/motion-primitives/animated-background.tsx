@@ -5,18 +5,16 @@ import { AnimatePresence, motion } from "motion/react";
 import {
   Children,
   cloneElement,
-  useEffect,
   useId,
   useState,
 } from "react";
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import styles from "./animated-background.module.scss";
-
 
 type AnimatedBackgroundChildProps = {
   "data-id": string;
   "data-checked"?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -25,8 +23,8 @@ type AnimatedBackgroundChildProps = {
 
 export type AnimatedBackgroundProps = {
   children:
-    | React.ReactElement<AnimatedBackgroundChildProps>[]
-    | React.ReactElement<AnimatedBackgroundChildProps>;
+    | ReactElement<AnimatedBackgroundChildProps>[]
+    | ReactElement<AnimatedBackgroundChildProps>;
   defaultValue?: string;
   onValueChange?: (newActiveId: string | null) => void;
   className?: string;
@@ -34,10 +32,8 @@ export type AnimatedBackgroundProps = {
   enableHover?: boolean;
 };
 
-
 export function AnimatedBackground({
   children,
-  defaultValue,
   onValueChange,
   className,
   transition,
@@ -51,11 +47,6 @@ export function AnimatedBackground({
     onValueChange?.(id);
   };
 
-  useEffect(() => {
-    if (defaultValue !== undefined) {
-    }
-  }, [defaultValue]);
-
   return Children.map(children, (child, index) => {
     const id = child.props["data-id"];
 
@@ -68,43 +59,36 @@ export function AnimatedBackground({
           onClick: () => handleSetActiveId(id),
         };
 
-    return cloneElement<AnimatedBackgroundChildProps>(
+    return cloneElement(
       child,
       {
         key: index,
-        className: [
-          styles.item,
-          child.props.className,
-        ]
+        className: [styles.item, child.props.className]
           .filter(Boolean)
           .join(" "),
         "data-checked": activeId === id ? "true" : "false",
         ...interactionProps,
       },
       <>
-<AnimatePresence initial={false}>
-          
-<motion.div
-  layoutId={`background-${uniqueId}`}
-  className={[
-    styles.highlight,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ")}
-  transition={{
-    type: "spring",
-    stiffness: 380,
-    damping: 32,
-    ...transition,
-  }}
-  initial={false}
-  animate={{
-    opacity: activeId === id ? 1 : 0,
-  }}
-/>
-
+        <AnimatePresence initial={false}>
+          <motion.div
+            layoutId={`background-${uniqueId}`}
+            className={[styles.highlight, className]
+              .filter(Boolean)
+              .join(" ")}
+            transition={{
+              type: "spring",
+              stiffness: 380,
+              damping: 32,
+              ...transition,
+            }}
+            initial={false}
+            animate={{
+              opacity: activeId === id ? 1 : 0,
+            }}
+          />
         </AnimatePresence>
+
         <span className={styles.content}>
           {child.props.children}
         </span>
