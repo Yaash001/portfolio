@@ -1,5 +1,5 @@
-
 import type { ReactNode } from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.scss";
 
 export const metadata = {
@@ -15,7 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+
+        <GoogleAnalytics
+          gaId={process.env.NEXT_PUBLIC_GA_ID!}
+        />
+      </body>
     </html>
   );
 }
