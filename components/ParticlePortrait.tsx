@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -18,7 +17,6 @@ export default function ParticlePortrait() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
 
@@ -26,33 +24,36 @@ export default function ParticlePortrait() {
 
     const image = new Image();
     let particles: Particle[] = [];
-let animationFrame = 0;
-let isRunning = false;
-let isInView = false;
+    let animationFrame = 0;
+    let isRunning = false;
+    let isInView = false;
 
-const startAnimation = () => {
-  if (
-    isRunning ||
-    !isInView ||
-    document.visibilityState !== "visible"
-  ) return;
-
-  isRunning = true;
-  animationFrame = requestAnimationFrame(draw);
-};
-
-const stopAnimation = () => {
-  isRunning = false;
-  cancelAnimationFrame(animationFrame);
-};
-
-let width = 0;
+    let width = 0;
     let height = 0;
     let isForming = false;
     let pointer = { x: -1000, y: -1000 };
 
+    const startAnimation = () => {
+      if (
+        isRunning ||
+        !isInView ||
+        document.visibilityState !== "visible"
+      ) {
+        return;
+      }
+
+      isRunning = true;
+      animationFrame = requestAnimationFrame(draw);
+    };
+
+    const stopAnimation = () => {
+      isRunning = false;
+      cancelAnimationFrame(animationFrame);
+    };
+
     const createParticles = () => {
       const rect = canvas.getBoundingClientRect();
+
       if (!rect.width || !rect.height || !image.naturalWidth) return;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -62,10 +63,12 @@ let width = 0;
 
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
+
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const offscreen = document.createElement("canvas");
       const offCtx = offscreen.getContext("2d");
+
       if (!offCtx) return;
 
       const scale = Math.min(
@@ -82,7 +85,10 @@ let width = 0;
       offCtx.drawImage(image, 0, 0, imageWidth, imageHeight);
 
       const pixels = offCtx.getImageData(
-        0, 0, imageWidth, imageHeight
+        0,
+        0,
+        imageWidth,
+        imageHeight
       ).data;
 
       const offsetX = (width - imageWidth) / 2;
@@ -111,6 +117,8 @@ let width = 0;
       }
 
       particles = nextParticles;
+      console.log("Particles created:", particles.length);
+console.log("Canvas size:", width, height);
     };
 
     const draw = () => {
@@ -142,20 +150,23 @@ let width = 0;
         particle.y += (destinationY - particle.y) * 0.09;
 
         ctx.beginPath();
-ctx.arc(particle.x, particle.y, 1.4, 0, Math.PI * 2);
-ctx.fillStyle = isForming
-  ? particle.color
-  : "rgba(249, 235, 215, 0.9)";
+        ctx.arc(particle.x, particle.y, 1.4, 0, Math.PI * 2);
 
-ctx.fill();
+        ctx.fillStyle = isForming
+          ? particle.color
+          : "rgba(249, 235, 215, 0.9)";
+
+        ctx.fill();
       }
 
-if (isRunning) {
-  animationFrame = requestAnimationFrame(draw);
-}    };
+      if (isRunning) {
+        animationFrame = requestAnimationFrame(draw);
+      }
+    };
 
     const handlePointerMove = (event: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
+
       pointer = {
         x: event.clientX - rect.left,
         y: event.clientY - rect.top,
@@ -171,45 +182,43 @@ if (isRunning) {
       pointer = { x: -1000, y: -1000 };
     };
 
-    // Register image events BEFORE setting src.
     image.onload = () => {
-  createParticles();
-  startAnimation();
-};
-
-const intersectionObserver = new IntersectionObserver(
-  ([entry]) => {
-    isInView = entry.isIntersecting;
-
-    if (isInView) {
+      createParticles();
       startAnimation();
-    } else {
-      stopAnimation();
-    }
-  },
-  { rootMargin: "100px" }
-);
-
-intersectionObserver.observe(canvas);
-
-const handleVisibilityChange = () => {
-  if (document.visibilityState === "visible") {
-    startAnimation();
-  } else {
-    stopAnimation();
-  }
+    };
+image.onerror = () => {
+  console.error("Portrait image failed:", image.src);
 };
 
-document.addEventListener(
-  "visibilitychange",
-  handleVisibilityChange
-);
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isInView = entry.isIntersecting;
 
-    image.onerror = () => {
-      console.error("Portrait image could not load. Check /images/YAASH.png");
+        if (isInView) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+
+    intersectionObserver.observe(canvas);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        startAnimation();
+      } else {
+        stopAnimation();
+      }
     };
 
-    image.src = "/images/YAASH.png";
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+
+    image.src ="/potraits/YAASH.png";
 
     canvas.addEventListener("pointermove", handlePointerMove);
     canvas.addEventListener("pointerenter", handlePointerEnter);
@@ -224,21 +233,19 @@ document.addEventListener(
     resizeObserver.observe(canvas);
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      stopAnimation();
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+
       canvas.removeEventListener("pointermove", handlePointerMove);
       canvas.removeEventListener("pointerenter", handlePointerEnter);
       canvas.removeEventListener("pointerleave", handlePointerLeave);
     };
-
-    
-    intersectionObserver.disconnect();
-
-document.removeEventListener(
-  "visibilitychange",
-  handleVisibilityChange
-);
-
   }, []);
 
   return (

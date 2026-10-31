@@ -1,8 +1,7 @@
 
 import about from "../data/about";
 import styles from "./Hero.module.scss";
-import ChessKing from "./ChessKing";
-
+import ChessKingLoader from "./ChessKingLoader";
 export default function Hero() {
   return (
     <section className={styles.hero} id="home">
@@ -34,11 +33,11 @@ export default function Hero() {
         </div>
 
 <div className={styles.hero__visual}>
-  <ChessKing />
+  <ChessKingLoader />
 
   <div className={styles.hero__resume}>
     <a
-      href="logo.png"  // TODO : MAKE A RESUME ADD HERE IN PUBLIC
+      href="/resume.pdf"  // TODO : MAKE A RESUME ADD HERE IN PUBLIC
       target="_blank"
       rel="noopener noreferrer"
       className={styles.hero__resumeView}
@@ -47,7 +46,7 @@ export default function Hero() {
     </a>
 
     <a
-      href="logo.png"       // TODO : MAKE A RESUME ADD HERE IN PUBLIC
+      href="/resume.pdf"       // TODO : MAKE A RESUME ADD HERE IN PUBLIC
       download="Yash-Lahane-Resume.pdf"
       className={styles.hero__resumeDownload}
     >
