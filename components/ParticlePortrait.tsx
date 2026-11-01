@@ -117,8 +117,6 @@ export default function ParticlePortrait() {
       }
 
       particles = nextParticles;
-      console.log("Particles created:", particles.length);
-console.log("Canvas size:", width, height);
     };
 
     const draw = () => {
