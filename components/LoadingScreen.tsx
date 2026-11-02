@@ -13,7 +13,7 @@ const bootMessages: string[] = [
   "ACCESS GRANTED.",
 ];
 
-type BootStage = "terminal" | "loader" | "welcome";
+type BootStage = "terminal" | "loader";
 
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(false);
@@ -48,7 +48,7 @@ export default function LoadingScreen() {
           typed += character;
           setCurrentLine(typed);
 
-          await wait(22);
+          await wait(30);
         }
 
         if (cancelled) return;
@@ -56,12 +56,12 @@ export default function LoadingScreen() {
         setLines((previous) => [...previous, message]);
         setCurrentLine("");
 
-        await wait(280);
+        await wait(200);
       }
 
       if (cancelled) return;
 
-      await wait(500);
+      await wait(200);
 
       // CIRCULAR YASH OS LOADER
       setStage("loader");
@@ -71,24 +71,17 @@ export default function LoadingScreen() {
 
         setProgress(value);
 
-        await wait(22);
+        await wait(30);
       }
 
       if (cancelled) return;
 
-      // CINEMATIC WELCOME SCREEN
-      await wait(500);
+      // AUTOMATIC PORTFOLIO REVEAL
+      await wait(200);
 
-      setStage("welcome");
-
-      await wait(1400);
-
-      if (cancelled) return;
-
-      // FADE OUT
       setExiting(true);
 
-      await wait(800);
+      await wait(600);
 
       if (!cancelled) {
         sessionStorage.setItem("yash-os-booted", "true");
@@ -227,26 +220,6 @@ export default function LoadingScreen() {
             {progress === 100
               ? "SYSTEM READY"
               : "LOADING PORTFOLIO ENVIRONMENT..."}
-          </p>
-        </div>
-      )}
-
-      {stage === "welcome" && (
-        <div className={styles.welcome}>
-          <p className={styles.welcomeEyebrow}>
-            YASH OS // SYSTEM ONLINE
-          </p>
-
-          <h1>WELCOME..</h1>
-
-          <div className={styles.welcomeLine} />
-
-          <p className={styles.welcomeSubtext}>
-            ALL SYSTEMS OPERATIONAL
-          </p>
-
-          <p className={styles.welcomeAccess}>
-            PORTFOLIO ACCESS GRANTED
           </p>
         </div>
       )}
