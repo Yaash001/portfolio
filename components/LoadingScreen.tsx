@@ -15,8 +15,11 @@ const bootMessages: string[] = [
 
 type BootStage = "terminal" | "loader";
 
-export default function LoadingScreen() {
-  const [visible, setVisible] = useState(false);
+export default function LoadingScreen({
+  onComplete,
+}: {
+  onComplete: () => void;
+}) {
   const [exiting, setExiting] = useState(false);
   const [stage, setStage] = useState<BootStage>("terminal");
   const [lines, setLines] = useState<string[]>([]);
@@ -30,12 +33,7 @@ export default function LoadingScreen() {
       new Promise((resolve) => setTimeout(resolve, ms));
 
     async function boot() {
-      if (sessionStorage.getItem("yash-os-booted")) {
-        return;
-      }
-
-      setVisible(true);
-
+      
       // TERMINAL BOOT SEQUENCE
       for (const message of bootMessages) {
         if (cancelled) return;
@@ -85,7 +83,7 @@ export default function LoadingScreen() {
 
       if (!cancelled) {
         sessionStorage.setItem("yash-os-booted", "true");
-        setVisible(false);
+  onComplete();
       }
     }
 
@@ -94,9 +92,8 @@ export default function LoadingScreen() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [onComplete]);
 
-  if (!visible) return null;
 
   return (
     <div

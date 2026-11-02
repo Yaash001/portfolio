@@ -1,3 +1,4 @@
+
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
@@ -7,23 +8,24 @@ import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import ScrollMotion from "../components/ScrollMotion";
-import LoadingScreen from "../components/LoadingScreen";
+import PortfolioGate from "../components/PortfolioGate";
 
 export default function Home() {
   return (
-    <>
-          <LoadingScreen />
+    <PortfolioGate>
+      <>
+        <Navbar />
 
-      <Navbar />
-      <ScrollMotion>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Education />
-        <Contact />
-      </ScrollMotion>
-    </>
+        <ScrollMotion>
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Experience />
+          <Education />
+          <Contact />
+        </ScrollMotion>
+      </>
+    </PortfolioGate>
   );
 }
