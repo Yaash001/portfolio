@@ -1,4 +1,5 @@
 import education from "../data/education";
+import certificates from "../data/certificates";
 import styles from "./Education.module.scss";
 
 export default function Education() {
@@ -31,6 +32,50 @@ export default function Education() {
           </article>
         ))}
       </div>
+
+      <details className={styles.certifications}>
+        <summary className={styles.certificateButton}>
+          View Certifications
+          <span aria-hidden="true">+</span>
+        </summary>
+
+        <div className={styles.certificateGrid}>
+          {certificates.length ? (
+            certificates.map((certificate) => (
+              <article
+                className={styles.certificate}
+                key={certificate.title}
+              >
+                <img
+                  src={certificate.image}
+                  alt={`${certificate.title} certificate`}
+                  loading="lazy"
+                />
+
+                <h3>{certificate.title}</h3>
+                <p>{certificate.issuer}</p>
+                <p className={styles.certificateDescription}>
+  {certificate.description}
+</p>
+
+                {certificate.link && (
+  <a
+    href={certificate.link}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    View Certificate ↗
+  </a>
+)}
+              </article>
+            ))
+          ) : (
+            <p className={styles.empty}>
+              Certifications will be added soon.
+            </p>
+          )}
+        </div>
+      </details>
     </section>
   );
 }
