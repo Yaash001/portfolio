@@ -10,7 +10,7 @@ export const metadata = {
   openGraph: {
     title: "Yash Lahane | Developer & Creative Technologist",
     description: "Explore my projects, skills, and achievements.",
-    images: "/opengraph-image.png",
+    images: ["/opengraph-image.png"],
   },
 };
 
